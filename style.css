@@ -2,66 +2,99 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+}
 
-}
 body{
-    background: linear-gradient(to right, #43cea2, #185a9d);
+    background: #41295a;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #2F0743,#1d0120, #41295a);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #2F0743,#1d0120, #41295a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+
 .superContainer{
     display: flex;
     width: 100vw;
-    height: 100vh;
+    height: 90vh;
+    justify-content: space-around;
+    transition: justify-content 500ms;
 }
+
 .menubar{
-    position: absolute;
+    position: relative;
     font-size: 3rem;
     color: white;
     font-weight: bold;
     cursor: pointer;
+    width: 100%;
+    height: 10vh;
+    background-image: linear-gradient(to bottom, #29062cb6, #00000000);
+    display: flex;
 }
 .title{
-    position: absolute;
+    position: relative;
     font-family: 'Pacifico', cursive;
     color: white;
     align-self: center;
     font-size: 2rem;
-    margin-left: calc(20% - 3.5rem);
-    word-wrap: break-word;
     text-align: center;
     text-shadow: 2px 2px 2px black;
+    width: 100%;
 }
 .container{
     position: relative;
     width: 40vw;
     height: 40vw;
-    /* margin: 10vw 15vw; */
     transition: transform 500ms;
     transform: rotate(45deg);
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    /* background-color: lightgreen; */
     align-self: center;
+    animation-name: startPresentation;
+    animation-duration: 500ms;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+}
+@keyframes startPresentation{
+    from{
+        transform: rotate(45deg) scale(1);
+    }
+    to{
+        transform: rotate(45deg) scale(0.75);
+    }
 }
 
+.showPresentation option{
+    transform: scale(0.7);
+}
 .option{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 5vw;
+    overflow: hidden;
     transition: transform 400ms;
+    background-color: #9b9b9b49;
+    border: 2px solid white;
+}
+.option + .option{
+    margin: 1rem;
 }
 .options{
-    /* border: 3px solid white; */
-    border-radius: 50%;
-    width: 7rem;
-    height: 7rem;
+    width: 120%;
+    height: 120%;
     display: flex;
     justify-content: center;
     align-items: center;
     transform: rotate(-45deg);
     transition: transform 500ms;
     cursor: pointer;
+
+    color: rgb(219, 219, 219);
+    font-size: 2.5rem;
+    font-family: Verdana;
+    text-shadow: 2px 2px 1px black;
+}
+.option:hover{
+    transform: translate(-20px,-20px);
 }
 #op1{
     background-image: url('./img/director-orquesta-png.png');
@@ -79,68 +112,55 @@ body{
     background-size: cover;
     background-position: center;
 }
-#op4{
-    background-image: url('./img/objective.png');
-    background-size: cover;
-    background-position: center;
-}
 
-.options:hover{
-    background-color: lightgreen;
-    border: 3px solid white;
-}
 .content{
     display: none;
     width: 60%;
-    height: 100%;
-    /* background-color: lightsalmon; */
-    /* transform: translateX(7rem); */
-    /* animation-name: showContent;
-    animation-duration: 500ms; */
-    /* animation-delay: 500ms; */
 }
-.selectedOption{
-    transform: scale(1.4);
-}
-.content::before{
-    content: '';
-    clip-path: polygon(100% 0, 50% 50%, 100% 100%);
-    width: 40px;
-    height: 40px;
-    display: block;
-    position: absolute;
-    background-color: white;
-    align-self: center;
-    margin-left: -40px;
-}
+
 .contentOp{
-    display: block;
-    padding: 50px;
+    display: none;
+    padding: 10px;
     border: 7px solid white;
     border-radius: 3px;
     width: 100%;
-    transform: scaleX(0.1);
-    transform-origin: center left;
+    max-height: 100%;
+    overflow: auto;
     animation-name: showContent;
+    transform-origin: top center;
     animation-duration: 500ms;
     animation-fill-mode: forwards;
     color: white;
     font-family: 'Roboto Slab', serif;
     text-shadow: 2px 2px 2px black;
     background-color: #cecece38;
+    white-space: pre-wrap;
 }
 .contentOp h2{
     text-align: center;
 }
 .contentOp p{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: justify;
+    width: 100%;
 }
+.contentOp li{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
+.contentOp img{
+    max-width: 70%;
+    max-height: 70%;
+}
+
 @keyframes showContent{
     from{
-        transform: scaleX(0.1);
+        transform: scaleY(0.1);
+        opacity: 0.1;
     }
     to{
-        transform: scaleX(1);
+        transform: scaleY(1);
+        opacity: 1;
     }
 }
 
